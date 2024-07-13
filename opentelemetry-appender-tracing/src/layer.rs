@@ -155,6 +155,7 @@ where
         event: &tracing::Event<'_>,
         _ctx: tracing_subscriber::layer::Context<'_, S>,
     ) {
+        println!("ON EVENT");
         #[cfg(feature = "experimental_metadata_attributes")]
         let normalized_meta = event.normalized_metadata();
         #[cfg(feature = "experimental_metadata_attributes")]
@@ -174,6 +175,7 @@ where
         visitor.visit_experimental_metadata(meta);
         // Visit fields.
         event.record(&mut visitor);
+        println!("EMITTED LOG");
 
         //emit record
         self.logger.emit(log_record);
